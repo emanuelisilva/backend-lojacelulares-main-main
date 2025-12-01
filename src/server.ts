@@ -4,7 +4,7 @@ import mongoose from "mongoose";
 // parte manu
 import express from "express";
 import cors from "cors";
-import produtoRoutes from "./rotas/produto.routes.js";
+import produtoRoutes from "./rotas/rotas-admin.js";
 import carrinhoRoutes from "./carrinho/carrinho.routes.js"; //jessica
 
 const app = express(); // ✅ declare antes de usar
