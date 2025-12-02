@@ -1,6 +1,7 @@
 import { Router } from "express";
 import ProdutoController from "../produtos/produto.controller.js";
 import CarrinhoController from "../carrinho/carrinho.controller.js";
+import usuarioController from "../usuarios/usuario.controller.js";
 
 
 const router = Router();
@@ -10,7 +11,7 @@ router.post("/produtos",  ProdutoController.adicionar); // admin apenas
 router.put("/produtos/:id",  ProdutoController.editar); // admin apenas
 router.delete("/produtos/:id", ProdutoController.excluir); // admin apenas
 //excluir todo carrinho 
-router.delete('/carrinho/:usuarioId', CarrinhoController.removertodo);
+router.get("/usuarios", usuarioController.listar);
 
 
 export default router;

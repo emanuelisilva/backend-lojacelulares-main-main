@@ -179,7 +179,9 @@ class CarrinhoController {
     }
     //remover                -> Remover o carrinho todo
     async removertodo(req: Request, res: Response) {
-        const { usuarioId } = req.body;
+       const usuarioId = req.usuarioId
+        if (!usuarioId)
+            return res.status(401).json({ mensagem: "Token não foi passado para adicionar no carrinho" })
         const carrinho = await db.collection<Carrinho>("carrinhos").findOne({ usuarioId: usuarioId });
         if (!carrinho) {
             return res.status(404).json({ mensagem: 'Carrinho não encontrado' });

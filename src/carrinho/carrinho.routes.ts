@@ -32,60 +32,60 @@
 // });
 
 // //Remover item do carrinho
-// // router.delete("/carrinho/:produtoId", async (req, res) => { //Ana Luíza 
+// // router.delete("/carrinho/:produtoId", async (req, res) => { 
 // //   try {
 // //     const userId = (req as any).usuarioId ;
-// //     const { produtoId } = req.params; //Ana Luíza 
+// //     const { produtoId } = req.params; 
 
-// //     const carrinho = await Carrinho.findOne({ usuario: userId }); //Ana Luíza 
+// //     const carrinho = await Carrinho.findOne({ usuario: userId });  
 // //     if (!carrinho)
-// //       return res.status(404).json({ msg: "Carrinho não encontrado." }); //Ana Luíza 
+// //       return res.status(404).json({ msg: "Carrinho não encontrado." });  
 
-// //     carrinho.itens = carrinho.itens.filter( //Ana Luíza 
+// //     carrinho.itens = carrinho.itens.filter(  
 // //       (item) => item.produto.toString() !== produtoId
-// //     ) as any; //Ana Luíza 
+// //     ) as any;  
 
-// //     await carrinho.save(); //Ana Luíza 
+// //     await carrinho.save(); 
 
-// //     res.json({ msg: "Item removido com sucesso.", carrinho }); //Ana Luíza 
+// //     res.json({ msg: "Item removido com sucesso.", carrinho });  
 // //   } catch (err) {
-// //     console.error(err); //Ana Luíza 
-// //     res.status(500).json({ msg: "Erro ao remover item." }); //Ana Luíza 
+// //     console.error(err);  
+// //     res.status(500).json({ msg: "Erro ao remover item." });  
 // //   }
-// // }); //Ana Luíza 
+// // }); 
 
 // //Exibir o total atualizado do carrinho
-// router.get("/carrinho", verificarToken, async (req, res) => { //Ana Luíza
+// router.get("/carrinho", verificarToken, async (req, res) => { 
 //   try {
-//     const userId = (req as any).user.id; //Ana Luíza 
+//     const userId = (req as any).user.id; 
 
-//     const carrinho = await Carrinho.findOne({ usuario: userId }); //Ana Luíza 
+//     const carrinho = await Carrinho.findOne({ usuario: userId }); 
 //     if (!carrinho)
-//       return res.status(404).json({ msg: "Carrinho vazio" }); //Ana Luíza 
+//       return res.status(404).json({ msg: "Carrinho vazio" }); 
 
-//     const produtosIds = carrinho.itens.map(item => item.produto); //Ana Luíza 
+//     const produtosIds = carrinho.itens.map(item => item.produto); 
 
-//     const produtos = await Produto.find({ //Ana Luíza 
+//     const produtos = await Produto.find({ 
 //       _id: { $in: produtosIds }
 //     });
 
-//     const total = carrinho.itens.reduce((soma, item) => { //Ana Luíza 
+//     const total = carrinho.itens.reduce((soma, item) => {  
 //       const produtoInfo = produtos.find(
-//         (p: any) => p._id.toString() === item.produto.toString() //Ana Luíza 
+//         (p: any) => p._id.toString() === item.produto.toString() 
 //       );
 
-//       const preco = produtoInfo?.preco || 0; //Ana Luíza 
+//       const preco = produtoInfo?.preco || 0; 
 
-//       return soma + preco * item.quantidade; //Ana Luíza 
+//       return soma + preco * item.quantidade;
 //     }, 0);
 
-//     res.json({ carrinho, total }); //Ana Luíza 
+//     res.json({ carrinho, total }); 
 
-//   } catch (err) { //Ana Luíza 
+//   } catch (err) {  
 //     console.error(err);
-//     res.status(500).json({ msg: "Erro ao buscar carrinho" }); //Ana Luíza 
+//     res.status(500).json({ msg: "Erro ao buscar carrinho" }); 
 //   }
-// }); //Ana Luíza 
+// }); 
 
 // ////////////// jessica
 // router.delete("/cart", auth, async (req, res) => {

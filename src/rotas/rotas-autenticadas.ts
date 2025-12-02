@@ -7,8 +7,8 @@ import carrinhoController from "../carrinho/carrinho.controller.js"; //importand
 const rotasAutenticadas = Router();
 
 // Rotas de usuários
-rotasAutenticadas.post("/usuarios", usuarioController.adicionar);
-rotasAutenticadas.get("/usuarios", usuarioController.listar);
+// rotasAutenticadas.post("/usuarios", usuarioController.adicionar);
+
 
 // Rotas de produtos
 rotasAutenticadas.post("/produtos", produtoController.adicionar);
@@ -21,6 +21,8 @@ rotasAutenticadas.post("/adicionarItem", carrinhoController.adicionarItem);
 
 rotasAutenticadas.get("/carrinho", carrinhoController.listar);
 rotasAutenticadas.delete("/carrinho/:produtoId", carrinhoController.removerItem);
+
+rotasAutenticadas.delete('/carrinho', carrinhoController.removertodo);
 
 
 export default rotasAutenticadas;

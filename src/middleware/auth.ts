@@ -2,13 +2,14 @@ import type { Request, Response, NextFunction } from "express";
 import jwt from "jsonwebtoken";
 
 
-declare global { //Ana Luíza
+declare global { 
   namespace Express {
-    interface Request { //Ana Luíza
+    interface Request { 
       usuarioId?: any;
-    } //Ana Luíza
+        tipo?: string;
+    } 
   } 
-} //Ana Luíza
+} 
 
 const SECRET = process.env.JWT_SECRET || "segredo";
 
@@ -23,10 +24,11 @@ export const verificarToken = (req: Request, res: Response, next: NextFunction) 
             console.log(err)
             return res.status(401).json({mensagem:"Token inválido!"})
         }
-        if(typeof decoded==="string"||!decoded||!("usuarioId" in decoded))
+        if(typeof decoded==="string"||!decoded||!("usuarioId" in decoded)||!("tipo" in decoded)) 
             return res.status(401).json({mensagem:"Payload inválido!"})
 
         req.usuarioId = decoded.usuarioId;
+          req.tipo = decoded.tipo;
         next()
 
     })
@@ -35,8 +37,8 @@ export const verificarToken = (req: Request, res: Response, next: NextFunction) 
 
 // jessica ✅ Verifica se o usuário é admin
 export const verificarAdmin = (req: Request, res: Response, next: NextFunction) => {
-    const user = (req as any).user;
-    if (!user.tipo || user.tipo !== "admin") {
+    const tipo = req.tipo;
+    if (!tipo || tipo !== "admin") {
         return res.status(403).json({ msg: "Acesso negado: Admin apenas" });
     }
     next();
