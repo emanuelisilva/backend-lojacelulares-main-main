@@ -106,7 +106,11 @@ class CarrinhoController {
         res.status(200).json(carrinho);
     }
     async removerItem(req: Request, res: Response) {
-        const { produtoId, usuarioId } = req.body;
+        // const { produtoId } = req.body;
+        const { produtoId } = req.params;
+        const usuarioId = req.usuarioId
+        if (!usuarioId)
+            return res.status(401).json({ mensagem: "Token não foi passado para adicionar no carrinho" })
         //Faça o removerItem
         //Do melhor jeito
 
@@ -162,7 +166,8 @@ class CarrinhoController {
         )
         return res.status(200).json(carrinho);
     }
-    async listar(req: Request, res: Response) {
+    async listar(req: RequestAuth, res: Response) {
+        console.log("Listar carrinho chamado");
         const usuarioId = req.usuarioId
         if (!usuarioId)
             return res.status(401).json({ mensagem: "Token não foi passado para adicionar no carrinho" })
@@ -172,10 +177,9 @@ class CarrinhoController {
         }
         return res.status(200).json(carrinho);
     }
-    async remover(req: Request, res: Response) {
-        const usuarioId = req.usuarioId
-        if (!usuarioId)
-            return res.status(401).json({ mensagem: "Token não foi passado para adicionar no carrinho" })
+    //remover                -> Remover o carrinho todo
+    async removertodo(req: Request, res: Response) {
+        const { usuarioId } = req.body;
         const carrinho = await db.collection<Carrinho>("carrinhos").findOne({ usuarioId: usuarioId });
         if (!carrinho) {
             return res.status(404).json({ mensagem: 'Carrinho não encontrado' });
@@ -185,4 +189,7 @@ class CarrinhoController {
     }
 
 }
+
+
+
 export default new CarrinhoController();

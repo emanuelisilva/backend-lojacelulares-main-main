@@ -5,7 +5,8 @@ import mongoose from 'mongoose';
 
 import rotasNaoAutenticadas from './rotas/rotas-nao-autenticadas.js';
 import rotasAutenticadas from './rotas/rotas-autenticadas.js';
-import { verificarToken } from './middleware/auth.js';
+import { verificarAdmin, verificarToken } from './middleware/auth.js';
+import rotasAdmin from './rotas/rotas-admin.js';
 
 // Configuração da aplicação
 const app = express();
@@ -20,6 +21,10 @@ app.use(verificarToken);
 
 // Rotas privadas (ex: listar produtos, excluir produto, etc)
 app.use(rotasAutenticadas);
+
+app.use(verificarAdmin)
+
+app.use(rotasAdmin)
 
 // 🔗 Conexão com MongoDB Atlas
 mongoose

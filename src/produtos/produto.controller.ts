@@ -10,12 +10,12 @@ class ProdutoController {
     }
 
     async adicionar(req: Request, res: Response) {
-        const { nome, preco, categoria } = req.body
-        if (!nome || !preco || !categoria)
+        const { nome, preco, categoria,urlfoto } = req.body
+        if (!nome || !preco || !categoria || !urlfoto)
             return res.status(400).json({ msg: "Nome, preço e categoria são obrigatórios" })
 
-        const resultado = await db.collection('produtos').insertOne({ nome, preco, categoria })
-        res.status(201).json({ _id: resultado.insertedId, nome, preco, categoria })
+        const resultado = await db.collection('produtos').insertOne({ nome, preco, categoria,urlfoto })
+        res.status(201).json({ _id: resultado.insertedId, nome, preco, categoria,urlfoto })
     }
 
     async editar(req: Request, res: Response) {
@@ -29,6 +29,7 @@ class ProdutoController {
         if (nome) updateDoc.nome = nome
         if (preco) updateDoc.preco = preco
         if (categoria) updateDoc.categoria = categoria
+    
 
         await db.collection('produtos').updateOne(
             { _id: new ObjectId(id) },

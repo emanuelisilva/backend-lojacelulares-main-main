@@ -3,6 +3,7 @@ import produtoController from "../produtos/produto.controller.js";
 import { Router } from "express";
 import carrinhoController from "../carrinho/carrinho.controller.js"; //importando o carrinho controller
 
+
 const rotasAutenticadas = Router();
 
 // Rotas de usuários
@@ -19,4 +20,9 @@ rotasAutenticadas.delete("/produtos/:id", produtoController.excluir);
 rotasAutenticadas.post("/adicionarItem", carrinhoController.adicionarItem);
 
 rotasAutenticadas.get("/carrinho", carrinhoController.listar);
+rotasAutenticadas.delete("/carrinho/:produtoId", carrinhoController.removerItem);
+
+
 export default rotasAutenticadas;
+
+

@@ -1,6 +1,7 @@
 import type { Request, Response, NextFunction } from "express";
 import jwt from "jsonwebtoken";
 
+
 declare global { //Ana Luíza
   namespace Express {
     interface Request { //Ana Luíza
