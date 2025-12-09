@@ -3,6 +3,7 @@ import { db } from '../database/banco-mongo.js'
 import jwt from 'jsonwebtoken'
 import bcrypt from 'bcrypt'
 import mongoose from "mongoose"
+import { ObjectId } from 'mongodb'
 
 // ------------------------
 // Mongoose Schema
@@ -82,7 +83,15 @@ class UsuariosController {
 
     res.status(200).json({ token }) // jessica ✅ Token agora carrega tipo
   }
-
+async excluir(req: Request, res: Response) {
+    const { id } = req.params;
+    if(!id) return res.status(400).json({mensagem:"ID do usuário é obrigatório!"})
+      const resultado = await db.collection('usuarios').deleteOne({ _id: new ObjectId(id) });
+      if (resultado.deletedCount === 0) {
+          return res.status(404).json({ mensagem: "Usuário não encontrado." });
+      }
+      res.status(200).json({ mensagem: "Usuário excluído com sucesso." });
+  }
 }
 
 export default new UsuariosController()

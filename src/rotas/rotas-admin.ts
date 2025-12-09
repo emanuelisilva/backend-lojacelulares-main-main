@@ -10,8 +10,10 @@ const router = Router();
 router.post("/produtos",  ProdutoController.adicionar); // admin apenas
 router.put("/produtos/:id",  ProdutoController.editar); // admin apenas
 router.delete("/produtos/:id", ProdutoController.excluir); // admin apenas
+router.post("/cadrastroprodutos", ProdutoController.adicionar); // admin apenas
 //excluir todo carrinho 
 router.get("/usuarios", usuarioController.listar);
 
+router.delete("/usuarios/:id", usuarioController.excluir);
 
 export default router;
