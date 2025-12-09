@@ -9,7 +9,7 @@
   "scripts": {
     "dev": "tsx watch src/index-mongo.ts",
     "dev:mongo": "tsx watch src/index-mongo.ts",
-    "build": "install && tsc",
+    "build": "npm install && tsc",
     "start": "node dist/index-mongo.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
